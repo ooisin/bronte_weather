@@ -1,13 +1,19 @@
-import requests
+"""
+Fetches the current weather data for a city (Bronte), generates a simple HTML file
+displaying the current, min, and max temperatures for the current day.
+"""
 from datetime import datetime as dt
+import requests
+
 
 # API config
-key = '36d7d125048840500ac6977c2f526fdb'
-city = 'Bronte, AU'
-url = "https://api.openweathermap.org/data/2.5/weather?q={}&appid={}&units=metric".format(city, key)
+API_KEY = '36d7d125048840500ac6977c2f526fdb'
+CITY = 'Bronte, AU'
+BASE_URL = 'http://api.openweathermap.org/data/2.5/weather'
+URL = f"{BASE_URL}?q={CITY}&appid={API_KEY}&units=metric"
 
 # API request
-response = requests.get(url)
+response = requests.get(URL, timeout=20)
 data = response.json()
 
 # Retrieve temps from json
@@ -24,7 +30,7 @@ html_content = f"""
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Weather in {city}</title>
+        <title>Weather in {CITY}</title>
         <style>
             body {{
                 font-family: Helvetica, sans-serif;
@@ -41,7 +47,7 @@ html_content = f"""
             .weather-data {{
                 background-color: #2c2c2c;
                 padding: 10px;
-                border-radius: 10px; 
+                border-radius: 10px;
             }}
             p {{
                 margin: 10px 0;
@@ -50,7 +56,7 @@ html_content = f"""
         </style>
     </head>
     <body>
-        <h1>Weather in {city}</h1>
+        <h1>Weather in {CITY}</h1>
         <div class="weather-data">
             <p>Date: {date}</p>
             <p>Current Temp: {temp_current:.1f}°C</p>
@@ -62,10 +68,5 @@ html_content = f"""
    """
 
 # Write template to separate file
-with open('weather.html', 'w') as f:
+with open('weather.html', 'w', encoding='utf-8') as f:
     f.write(html_content)
-
-
-
-
-
