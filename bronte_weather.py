@@ -36,17 +36,16 @@ html_content = f"""
             }}
             h1 {{
                 color: #ffffff;
-                text-align: center;
+                text-align: left;
             }}
             .weather-data {{
                 background-color: #2c2c2c;
-                padding: 20px;
-                border-radius: 10px;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                padding: 10px;
+                border-radius: 10px; 
             }}
             p {{
                 margin: 10px 0;
-                font-size: 18px;
+                font-size: 30px;
             }}
         </style>
     </head>
